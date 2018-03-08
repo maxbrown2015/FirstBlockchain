@@ -259,7 +259,7 @@ def full_chain():
 
 
 """
-This method registers nodes to the network. The more nodes, the faster transactions can be verified.
+This method registers nodes to the network. 
 """
 @app.route('/nodes/register' , methods=['POST'])
 def register_nodes():
