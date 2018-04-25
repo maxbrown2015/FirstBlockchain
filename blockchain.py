@@ -11,7 +11,6 @@ from flask import Flask, jsonify, request
 import requests
 
 
-
 class Blockchain(object):
 
     """
@@ -26,7 +25,6 @@ class Blockchain(object):
 
         #initial block
         self.new_block(proof=100, previous_hash=1)
-
 
     """
     Adds a new node to the list of nodes. A node is a participant on the blockchain
@@ -129,7 +127,6 @@ class Blockchain(object):
     """
     def new_transaction(self, sender, recipient, amount):
 
-
         self.current_transactions.append({
             'sender': sender,
             'recipient': recipient,
@@ -162,7 +159,6 @@ class Blockchain(object):
     """
     def proof_of_work(self, last_proof):
 
-
         proof = 0
         while self.valid_proof(last_proof, proof) is False:
             proof += 1
@@ -179,7 +175,7 @@ class Blockchain(object):
     def valid_proof(last_proof, proof):
         guess = f'{last_proof}{proof}'.encode()
         guess_hash = hashlib.sha256(guess).hexdigest()
-        return guess_hash[:4] == "0000"
+        return guess_hash[:4] == 0000
 
 
 """
@@ -203,6 +199,7 @@ transactions and allows the system to run. This also allows for the introduction
 circulation. Next, it creates a new block using the proof-of-work and the hash from the last
 block in the chain. Finally, it appends the block to the end of the current chain.
 """
+
 
 @app.route('/mine', methods=['GET'])
 def mine():
@@ -237,6 +234,8 @@ transactions. These transactions will be included in a new block and will eventu
 added to the blockchain. Currently, this implementation does not prevent faulty transactions such
 as spending without having enough balance.
 """
+
+
 @app.route('/transactions/new', methods=['POST'])
 def new_transaction():
 
@@ -261,6 +260,8 @@ def full_chain():
 """
 This method registers nodes to the network. 
 """
+
+
 @app.route('/nodes/register' , methods=['POST'])
 def register_nodes():
 
@@ -286,6 +287,8 @@ def register_nodes():
 This method resolves any conflicts by making all the nodes in the network have the same
 chain.
 """
+
+
 @app.route('/nodes/resolve', methods=['GET'])
 def consensus():
 
