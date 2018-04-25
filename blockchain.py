@@ -10,15 +10,15 @@ from urllib.parse import urlparse
 from flask import Flask, jsonify, request
 import requests
 
+"""
+The blockchain object contains a list of blocks (the chain), a list of transactions to be added to
+the next block, and a set of all nodes in the network. Instantiating a new blockchain creates a
+genesis block, from which all blocks are cryptographically linked to.
+"""
 
 
 class Blockchain(object):
 
-    """
-    The blockchain object contains a list of blocks (the chain), a list of transactions to be added to
-    the next block, and a set of all nodes in the network. Instantiating a new blockchain creates a
-    genesis block, from which all blocks are cryptographically linked to.
-    """
     def __init__(self):
         self.chain = []
         self.current_transactions = []
